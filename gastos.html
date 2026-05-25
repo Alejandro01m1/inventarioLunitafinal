@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Gastos</title>
+
+<link rel="stylesheet"
+      href="css/global.css">
+
+<link rel="stylesheet"
+      href="css/styleGastos.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="topGastos">
+
+<h1>Gastos</h1>
+
+<a href="menu.html"
+   class="btnVolver">
+
+⬅ Volver
+
+</a>
+
+</div>
+
+<!-- FORM -->
+
+<div class="formGastos">
+
+<h2 style="margin-bottom:20px;">
+
+Registrar Gasto
+
+</h2>
+
+<form id="formGasto">
+
+<div class="grupo">
+
+<label>Nombre del gasto</label>
+
+<input type="text"
+       id="nombreGasto"
+       required>
+
+</div>
+
+<div class="grupo">
+
+<label>Valor gastado</label>
+
+<input type="number"
+       id="valorGasto"
+       required>
+
+</div>
+
+<button type="submit"
+        class="btnGuardar">
+
+Agregar Gasto
+
+</button>
+
+</form>
+
+</div>
+
+<!-- CARD TOTAL -->
+
+<div class="gastoTotalCard">
+
+<div class="gastoTitulo">
+
+💸 Total Gastos
+
+</div>
+
+<div class="gastoValor"
+     id="totalGastos">
+
+$0
+
+</div>
+
+</div>
+
+<!-- TABLA -->
+
+<div class="tablaGastos">
+
+<h2 style="margin-bottom:20px;">
+
+📋 Historial de Gastos
+
+</h2>
+
+<div class="tablaContainer">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Gasto</th>
+<th>Valor</th>
+<th>Acción</th>
+
+
+</tr>
+
+</thead>
+
+<tbody id="tablaGastos">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module"
+        src="js/gastos.js"></script>
+
+</body>
+
+</html>
