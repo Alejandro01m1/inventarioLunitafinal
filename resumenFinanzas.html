@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanzas</title>
-    
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/styleFinanzas.css">
 </head>
-
 <body>
-
 <div class="container">
-
     <div class="topFinanzas">
         <h1>Finanzas</h1>
         <a href="menu.html" class="btnVolver">⬅ Volver</a>
@@ -21,10 +16,9 @@
 
     <div class="formFinanzas">
         <h2 style="margin-bottom:20px;">Registrar Información Financiera</h2>
-        
         <form id="formFinanzas">
             <div class="grupo">
-                <label>Dinero que deben (Deuda actual)</label>
+                <label>Dinero que deben (Pendiente)</label>
                 <input type="number" id="dineroDeben" placeholder="Ej: 50000" required>
             </div>
             <div class="grupo">
@@ -41,7 +35,7 @@
             <div class="finanzaValor" id="totalVendido">$0</div>
         </div>
         <div class="finanzaCard">
-            <div class="finanzaTitulo">🏦 Total Invertido</div>
+            <div class="finanzaTitulo">🏦 Costo de lo Vendido</div>
             <div class="finanzaValor" id="totalInvertido">$0</div>
         </div>
         <div class="finanzaCard">
@@ -53,13 +47,11 @@
             <div class="finanzaValor" id="totalDeben">$0</div>
         </div>
         <div class="finanzaCard realCard">
-            <div class="finanzaTitulo">📈 Dinero Real en Bolsillo</div>
+            <div class="finanzaTitulo">📈 Dinero Real en Caja</div>
             <div class="finanzaValor" id="dineroReal">$0</div>
         </div>
     </div>
-
 </div>
-
 <script type="module" src="js/finanzas.js"></script>
 </body>
 </html>

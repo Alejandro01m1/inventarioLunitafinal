@@ -3,33 +3,41 @@ import { collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/
 
 const formFinanzas = document.getElementById("formFinanzas");
 
-formFinanzas.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    // Captura los valores del formulario
-    const dineroDeben = Number(document.getElementById("dineroDeben").value || 0);
-    const envio = Number(document.getElementById("envio").value || 0);
+if (formFinanzas) {
+    formFinanzas.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const dineroDeben = Number(document.getElementById("dineroDeben").value || 0);
+        const envio = Number(document.getElementById("envio").value || 0);
 
-    // Guardamos los datos del registro en la colección "finanzas"
-    await addDoc(collection(db, "finanzas"), { 
-        dineroDeben, 
-        envio,
-        fecha: new Date().getTime() 
+        await addDoc(collection(db, "finanzas"), { dineroDeben, envio, fecha: new Date() });
+        location.reload();
     });
-    location.reload();
-});
+}
 
-async function calcularFinanzas() {
-    let tVendido = 0, tInvertido = 0, tEnvio = 0, tDeben = 0;
+async function cargarDatos() {
+    let tVendido = 0;      
+    let tCostoVendido = 0; 
+    let tEnvio = 0;
+    let tDeben = 0;
 
-    // 1. Obtenemos datos de la colección "articulos"
     const artSnap = await getDocs(collection(db, "articulos"));
+    
+    console.log("--- AUDITORÍA DE COSTOS (Compara esto con tu cuaderno) ---");
+    
     artSnap.forEach(doc => {
         const a = doc.data();
-        tVendido += Number(a.ingresos || 0);
-        tInvertido += Number(a.costoTotal || 0);
+        const pMayorista = Number(a.precioMayorista || 0);
+        const cantVendida = Number(a.cantidadVendida || 0);
+        const ingresos = Number(a.ingresos || 0);
+        
+        const costoFila = (pMayorista * cantVendida);
+        tCostoVendido += costoFila;
+        tVendido += ingresos;
+        
+        // ESTA LÍNEA ES LA CLAVE: Mira la consola (F12)
+        console.log(`Producto: ${a.nombre} | Vendidos: ${cantVendida} | P.Mayorista: ${pMayorista} | Total sumado: ${costoFila}`);
     });
 
-    // 2. Obtenemos datos de la colección "finanzas"
     const finSnap = await getDocs(collection(db, "finanzas"));
     finSnap.forEach(doc => {
         const d = doc.data();
@@ -37,16 +45,19 @@ async function calcularFinanzas() {
         tDeben += Number(d.dineroDeben || 0);
     });
 
-    // 3. CÁLCULO ESTRICTO
-    // El dinero real es lo que queda tras restar los costos operativos y de compra
-    const dineroReal = tVendido - tInvertido - tEnvio;
+    // Cálculos
+    const dineroReal = tVendido - tCostoVendido - tEnvio - tDeben;
 
-    // 4. Actualizamos el DOM
+    // Mostrar
     document.getElementById("totalVendido").innerText = "$" + tVendido.toLocaleString();
-    document.getElementById("totalInvertido").innerText = "$" + tInvertido.toLocaleString();
+    document.getElementById("totalInvertido").innerText = "$" + Math.round(tCostoVendido).toLocaleString();
     document.getElementById("gastosEnvio").innerText = "$" + tEnvio.toLocaleString();
     document.getElementById("totalDeben").innerText = "$" + tDeben.toLocaleString();
-    document.getElementById("dineroReal").innerText = "$" + dineroReal.toLocaleString();
+    document.getElementById("dineroReal").innerText = "$" + Math.round(dineroReal).toLocaleString();
+    
+    console.log("--- RESULTADOS FINALES ---");
+    console.log("Suma total de Costos:", tCostoVendido);
+    console.log("Dinero Real:", dineroReal);
 }
 
-calcularFinanzas();
+cargarDatos();
