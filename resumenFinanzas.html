@@ -16,42 +16,66 @@
 
     <div class="formFinanzas">
         <h2 style="margin-bottom:20px;">Registrar Información Financiera</h2>
+
         <form id="formFinanzas">
             <div class="grupo">
                 <label>Dinero que deben (Pendiente)</label>
                 <input type="number" id="dineroDeben" placeholder="Ej: 50000" required>
             </div>
+
             <div class="grupo">
                 <label>Gastos de envío acumulados</label>
                 <input type="number" id="envio" placeholder="Ej: 10000" required>
             </div>
-            <button type="submit" class="btnGuardar">Guardar Registro</button>
+
+            <!-- NUEVO CAMPO -->
+            <div class="grupo">
+                <label>Dinero reinvertido en inventario</label>
+                <input type="number" id="reinversion" placeholder="Ej: 300000" required>
+            </div>
+
+            <button type="submit" class="btnGuardar">
+                Guardar Registro
+            </button>
         </form>
     </div>
 
     <div class="finanzasGrid">
+
         <div class="finanzaCard">
             <div class="finanzaTitulo">💰 Total Vendido</div>
             <div class="finanzaValor" id="totalVendido">$0</div>
         </div>
+
         <div class="finanzaCard">
             <div class="finanzaTitulo">🏦 Costo de lo Vendido</div>
             <div class="finanzaValor" id="totalInvertido">$0</div>
         </div>
+
         <div class="finanzaCard">
             <div class="finanzaTitulo">🚚 Gastos Envío</div>
             <div class="finanzaValor" id="gastosEnvio">$0</div>
         </div>
+
         <div class="finanzaCard">
             <div class="finanzaTitulo">⏳ Dinero Pendiente</div>
             <div class="finanzaValor" id="totalDeben">$0</div>
         </div>
+
+        <!-- NUEVA TARJETA -->
+        <div class="finanzaCard">
+            <div class="finanzaTitulo">📦 Reinversión</div>
+            <div class="finanzaValor" id="totalReinversion">$0</div>
+        </div>
+
         <div class="finanzaCard realCard">
             <div class="finanzaTitulo">📈 Dinero Real en Caja</div>
             <div class="finanzaValor" id="dineroReal">$0</div>
         </div>
+
     </div>
 </div>
+
 <script type="module" src="js/finanzas.js"></script>
 </body>
 </html>
